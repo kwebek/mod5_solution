@@ -87,7 +87,7 @@ $ajaxUtils.sendGetRequest(
   true); // Explicitely setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
-
+console.log("toto");
 
 // Builds HTML for the home page based on categories array
 // returned from the server.
@@ -101,12 +101,11 @@ function buildAndShowHomeHTML (categories) {
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
       // variable's name implies it expects.
-     var chosenCategoryShortName = function (category) {
-  var propToReplace = "{{" + randomCategoryShortName + "}}";
-  string = string
-    .replace(new RegExp(propToReplace, "g"), propValue);
-  return string;
-};
+      console.log(typeof categories);
+      var chosenCategoryShortName = chooseRandomCategory(categories).short_name; // à voir si faudrait pas parser au préalable
+
+console.log("toto");
+
 
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -121,12 +120,16 @@ function buildAndShowHomeHTML (categories) {
       // it into the home html snippet.
       //
       // var homeHtmlToInsertIntoMainPage = ....
-
+ chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml,
+                                                        "randomCategoryShortName",
+                                                        chosenCategoryShortName) ;
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
       // ....
+insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
